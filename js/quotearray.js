@@ -45,8 +45,8 @@ var quotes = [
   {
     quote:"I love the smell of napalm in the morning...",
     source: "Apocalypse Now",
-    citation: " Robert Duvall (Lt. Bill Kilgore)",
-    year: 1979
+    // citation: " Robert Duvall (Lt. Bill Kilgore)",
+    // year: 1979
   },
   {
     quote:"A census taker once tried to test me. I ate his liver with some fava beans and a nice Chianti.",
