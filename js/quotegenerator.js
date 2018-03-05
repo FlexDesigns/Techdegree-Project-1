@@ -1,13 +1,16 @@
 //event listener to respond to the window loading, including all scripts. When this is done, it will run the printQuote function every 20 seconds.
 //also runs the script initially on load.
-window.onload = printQuote(), setInterval(printQuote, 20000);
+window.onload = printQuote() , setInterval(printQuote, 20000);
 
 // event listener to respond to "Show another quote" button clicks
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+document.getElementById('loadQuote').addEventListener("click", backgroundChanger, false);
 
 var citationPresent = true; //boolean for checking if citation is listed
 var yearKnown = true; //boolean for checking if year is listed
+
+
 
 function getRandomQuote(){ //Function to retrieve quote from the array
   let randomQuote = Math.floor(Math.random()*quotes.length); //Stores a random object value from the array "quotes", but not a specific property. E.g. if it grabs 7, it will grab the 7th object, but not any property of it.
@@ -16,6 +19,7 @@ function getRandomQuote(){ //Function to retrieve quote from the array
 };
 
 function printQuote(){
+    backgroundChanger();
   getRandomQuote();
 
   let ran = getRandomQuote(); //variable for storing the value of getRandomQuote
@@ -32,13 +36,13 @@ function printQuote(){
   let ptags = document.getElementsByTagName('p'); //retrieves all p tag elements and stores them in an array
   let spantags = document.getElementsByTagName('span'); //retrieves all span elements and stores them in an array
 
-  if(quotes[ran].citation == null){ //checks if citation is present and sets the variable to false if its missing, else sets it to true.
+  if(quotes[ran].citation){ //checks if citation is present and sets the variable to false if its missing, else sets it to true.
     citationPresent = false;
   }
   else{
     citationPresent = true;
   }
-  if(quotes[ran].year == null){ //checks if year is present and sets the variable to false if its missing, else sets it to true.
+  if(quotes[ran].year){ //checks if year is present and sets the variable to false if its missing, else sets it to true.
       yearKnown = false;
   }
   else{
@@ -65,11 +69,14 @@ function printQuote(){
   ptags[1].classList.add("source");//adds the source class to the second set of p tags in the string
   ptags[2].setAttribute('id','trivia');//adds the trivia id to the third set of p tags in the string, I opted to use this over element.id just simply to ensure it works.
 
+};
+
+function backgroundChanger(){
   //Generates random number between 0 and 256 for red, green and blue variables
   let red = Math.floor(Math.random() * 256);
   let green = Math.floor(Math.random() * 256);
   let blue = Math.floor(Math.random() * 256);
-
   let bgColour = "rgb(" + red + "," + green + "," + blue + ")"; //constructs a string using the above variables which prints as rgb(red,green,blue) and stores it in a variable
+
   document.body.style.backgroundColor = bgColour; //sets the background color of the body using CSS styles to the string stored in bgColour
-};
+}
